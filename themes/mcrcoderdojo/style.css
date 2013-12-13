@@ -2033,6 +2033,12 @@ a.post-thumbnail:hover {
 	z-index: 2;
 }
 
+#secondary img.logo {
+	display: block;
+	margin: 0 auto;
+	max-width: 100%;
+}
+
 .site-description {
 	display: none;
 	font-size: 12px;
@@ -3609,7 +3615,7 @@ a.post-thumbnail:hover {
 
 	.site-description {
 		display: block;
-		margin: -3px 0 21px;
+		margin: 21px 0;
 	}
 
 	.site-description:empty {
