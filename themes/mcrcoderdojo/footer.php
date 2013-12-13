@@ -17,8 +17,7 @@
 			<?php get_sidebar( 'footer' ); ?>
 
 			<div class="site-info">
-				<?php do_action( 'twentyfourteen_credits' ); ?>
-				<a href="<?php echo esc_url( __( 'http://wordpress.org/', 'twentyfourteen' ) ); ?>"><?php printf( __( 'Proudly powered by %s', 'twentyfourteen' ), 'WordPress' ); ?></a>
+				Proudly powered by <a href="http://wordpress.org/" target="_blank">WordPress</a>, theme available on our <a href="http://github.com/mcrcoderdojo/mcrcoderdojo.org.uk" target="_blank">GitHub</a>
 			</div><!-- .site-info -->
 		</footer><!-- #colophon -->
 	</div><!-- #page -->
