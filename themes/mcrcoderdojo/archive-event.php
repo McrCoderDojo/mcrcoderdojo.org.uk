@@ -50,11 +50,16 @@ get_header(); ?>
 					 		$past = true;
 					 	}
 
+					 	$venue = get_field('venue');
+					 	if (is_array($venue)) {
+						    $venue = array_pop($venue);
+						}
+
 					 	?>
 
 					 	<li>
 					 		<a href="<?php the_permalink(); ?>"><?php echo $date->format(get_option('date_format')); ?></a>
-					 		at <?php the_field('venue'); ?>
+					 		at <?php echo get_the_title($venue); ?>
 					 	</li>
 
 					 	<?php
