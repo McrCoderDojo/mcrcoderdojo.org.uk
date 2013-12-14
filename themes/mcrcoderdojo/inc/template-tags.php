@@ -70,7 +70,8 @@ if ( ! function_exists( 'twentyfourteen_post_nav' ) ) :
  *
  * @return void
  */
-function twentyfourteen_post_nav() {
+function twentyfourteen_post_nav($post_type='post') {
+	$post_type = ucfirst($post_type);
 	// Don't print empty markup if there's nowhere to navigate.
 	$previous = ( is_attachment() ) ? get_post( get_post()->post_parent ) : get_adjacent_post( false, '', true );
 	$next     = get_adjacent_post( false, '', false );
@@ -87,8 +88,8 @@ function twentyfourteen_post_nav() {
 			if ( is_attachment() ) :
 				previous_post_link( '%link', __( '<span class="meta-nav">Published In</span>%title', 'twentyfourteen' ) );
 			else :
-				previous_post_link( '%link', __( '<span class="meta-nav">Previous Post</span>%title', 'twentyfourteen' ) );
-				next_post_link( '%link', __( '<span class="meta-nav">Next Post</span>%title', 'twentyfourteen' ) );
+				previous_post_link( '%link', "<span class='meta-nav'>Previous {$post_type}</span>%title" );
+				next_post_link( '%link', "<span class='meta-nav'>Next {$post_type}</span>%title" );
 			endif;
 			?>
 		</div><!-- .nav-links -->

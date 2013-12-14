@@ -1643,14 +1643,6 @@ a.post-thumbnail:hover {
 	max-width: 474px;
 }
 
-.archive-title,
-.page-title {
-	font-size: 16px;
-	font-weight: 900;
-	line-height: 1.5;
-	margin: 0;
-}
-
 .taxonomy-description,
 .author-description {
 	color: #767676;

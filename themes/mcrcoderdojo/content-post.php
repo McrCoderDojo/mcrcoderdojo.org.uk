@@ -1,6 +1,8 @@
 <?php
 /**
- * The template for displaying posts in the Image post format
+ * The default template for displaying content
+ *
+ * Used for both single and index/archive/search.
  *
  * @package WordPress
  * @subpackage Twenty_Fourteen
@@ -15,7 +17,7 @@
 		<?php if ( in_array( 'category', get_object_taxonomies( get_post_type() ) ) && twentyfourteen_categorized_blog() ) : ?>
 		<div class="entry-meta">
 			<span class="cat-links"><?php echo get_the_category_list( _x( ', ', 'Used between list items, there is a space after the comma.', 'twentyfourteen' ) ); ?></span>
-		</div><!-- .entry-meta -->
+		</div>
 		<?php
 			endif;
 
@@ -27,20 +29,15 @@
 		?>
 
 		<div class="entry-meta">
-			<span class="post-format">
-				<a class="entry-format" href="<?php echo esc_url( get_post_format_link( 'image' ) ); ?>"><?php echo get_post_format_string( 'image' ); ?></a>
-			</span>
-
 			<?php twentyfourteen_posted_on(); ?>
-
-			<?php if ( ! post_password_required() && ( comments_open() || get_comments_number() ) ) : ?>
-			<span class="comments-link"><?php comments_popup_link( __( 'Leave a comment', 'twentyfourteen' ), __( '1 Comment', 'twentyfourteen' ), __( '% Comments', 'twentyfourteen' ) ); ?></span>
-			<?php endif; ?>
-
-			<?php edit_post_link( __( 'Edit', 'twentyfourteen' ), '<span class="edit-link">', '</span>' ); ?>
 		</div><!-- .entry-meta -->
 	</header><!-- .entry-header -->
 
+	<?php if ( is_search() ) : ?>
+	<div class="entry-summary">
+		<?php the_excerpt(); ?>
+	</div><!-- .entry-summary -->
+	<?php else : ?>
 	<div class="entry-content">
 		<?php
 			the_content( __( 'Continue reading <span class="meta-nav">&rarr;</span>', 'twentyfourteen' ) );
@@ -52,6 +49,7 @@
 			) );
 		?>
 	</div><!-- .entry-content -->
+	<?php endif; ?>
 
 	<?php the_tags( '<footer class="entry-meta"><span class="tag-links">', '', '</span></footer>' ); ?>
 </article><!-- #post-## -->

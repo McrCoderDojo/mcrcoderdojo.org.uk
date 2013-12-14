@@ -505,14 +505,4 @@ require get_template_directory() . '/inc/template-tags.php';
 // Add Theme Customizer functionality.
 require get_template_directory() . '/inc/customizer.php';
 
-/*
- * Add Featured Content functionality.
- *
- * To overwrite in a plugin, define your own Featured_Content class on or
- * before the 'setup_theme' hook.
- */
-if ( ! class_exists( 'Featured_Content' ) && 'plugins.php' !== $GLOBALS['pagenow'] ) {
-	require get_template_directory() . '/inc/featured-content.php';
-}
-
 include 'coderdojo-functions.php';
