@@ -1135,6 +1135,7 @@ a.post-thumbnail:hover {
 	display: none;
 }
 
+.home .byline,
 .single .byline,
 .group-blog .byline {
 	display: inline;

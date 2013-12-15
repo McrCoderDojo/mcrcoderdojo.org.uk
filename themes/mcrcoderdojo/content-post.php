@@ -39,8 +39,21 @@
 	</div><!-- .entry-summary -->
 	<?php else : ?>
 	<div class="entry-content">
-		<?php
-			the_content( __( 'Continue reading <span class="meta-nav">&rarr;</span>', 'twentyfourteen' ) );
+		<?php the_content();
+			if (is_singular('post') && get_field('links')): ?>
+				<h2>Links</h2>
+					<ul>
+				<?php while (has_sub_field('links')): ?>
+						<li>
+							<a href="<?php the_sub_field('url'); ?>" target="_blank">
+								<?php the_sub_field('title'); ?>
+							</a><br />
+							<?php the_sub_field('summary'); ?>
+						</li>
+				<?php endwhile; ?>
+				</ul>
+			<?php endif;
+
 			wp_link_pages( array(
 				'before'      => '<div class="page-links"><span class="page-links-title">' . __( 'Pages:', 'twentyfourteen' ) . '</span>',
 				'after'       => '</div>',
