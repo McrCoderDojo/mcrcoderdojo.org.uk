@@ -4181,3 +4181,22 @@ a.post-thumbnail:hover {
 		line-height: 36px;
 	}
 }
+
+/* Custom styles */
+
+.entry-content.team {
+	margin: 0;
+	max-width: 100%;
+}
+
+.user-bio {
+	width: 23%;
+	padding: 0 1%;
+	float: left;
+	min-height: 300px;
+	margin: 20px 0;
+}
+
+.user-bio.endcol {
+	clear:both;
+}

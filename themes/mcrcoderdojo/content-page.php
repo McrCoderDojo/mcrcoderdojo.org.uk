@@ -34,7 +34,7 @@
 		<?php the_excerpt(); ?>
 	</div><!-- .entry-summary -->
 	<?php else : ?>
-	<div class="entry-content">
+	<div class="entry-content <?php echo $pagename; ?>">
 		<?php
 			the_content( __( 'Continue reading <span class="meta-nav">&rarr;</span>', 'twentyfourteen' ) );
 			wp_link_pages( array(

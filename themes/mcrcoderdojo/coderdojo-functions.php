@@ -73,3 +73,61 @@ function create_venues_post_type() {
     register_post_type('venue', $args);
 }
 add_action('init', 'create_venues_post_type');
+
+// Shortcode [userbio]
+function mcd_user_bio($opts) {
+    $usernames = $opts['usernames'];
+
+    $html = '';
+
+    foreach (split(',', $usernames) as $i => $username) {
+        $user = get_user_by('slug', $username);
+        $name = "{$user->first_name} {$user->last_name}";
+        $fname = $user->first_name;
+        $id = $user->id;
+        $bio = get_field('bio', "user_{$id}");
+        $expertise = get_field('expertise', "user_{$id}");
+        $photo = get_field('photo', "user_{$id}");
+        $user = get_userdata($id);
+        $web = $user->user_url;
+        $twitter = get_field('twitter', "user_{$id}");
+        $gplus = get_field('google_plus', "user_{$id}");
+        $endcol = $i % 4 == 0 ? 'endcol' : '';
+
+        $html .= "<div class='user-bio {$endcol}'><h3>{$name}</h3>";
+
+        if ($photo) {
+            // $html .= "<img src='' style='width:140px;height:180px;border:1px solid black;' />";
+        }
+
+        $html .= "{$bio}<br />";
+
+        if ($expertise) {
+            $html .= "{$fname} runs sessions in {$expertise}<br />";
+        }
+
+        if ($web) {
+            $html .= "<a href='{$web}' class='web' target='_blank'>" . get_domain_from_url($web) . "</a><br />";
+        }
+
+        if ($twitter) {
+            $html .= "<a href='http://twitter.com/{$twitter}' class='twitter' target='_blank'>@{$twitter}</a><br />";
+        }
+
+        if ($gplus) {
+            $html .= "<a href='http://plus.google.com/+{$gplus}' class='gplus' target='_blank'>+{$gplus}</a>";
+        }
+
+        $html .= "</div>";
+    }
+    return $html;
+}
+add_shortcode('userbio', 'mcd_user_bio');
+
+// Useful Functions
+
+function get_domain_from_url($url) {
+    $parsed_url = parse_url($url);
+    $domain = str_replace('www.', '', $parsed_url['host']);
+    return $domain;
+}
