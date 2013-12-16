@@ -102,7 +102,7 @@ function mcd_user_bio($opts) {
             // $html .= "<img src='' style='width:140px;height:180px;border:1px solid black;' />";
         }
 
-        $html .= "{$bio}<br />";
+        $html .= "{$bio}";
 
         if ($expertise) {
             $html .= "{$fname} runs sessions in {$expertise}<br />";
@@ -117,7 +117,8 @@ function mcd_user_bio($opts) {
         }
 
         if ($gplus) {
-            $html .= "<a href='http://plus.google.com/+{$gplus}' class='gplus' target='_blank'>+{$gplus}</a>";
+            $gplus_text = $gplus[0] == '+' ? "{$gplus}" : $name;
+            $html .= "<a href='http://plus.google.com/{$gplus}' class='gplus' target='_blank'>{$gplus_text}</a>";
         }
 
         $html .= "</div>";
