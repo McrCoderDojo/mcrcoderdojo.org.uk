@@ -1,15 +1,3 @@
-<?php
-/**
- * The default template for displaying content
- *
- * Used for both single and index/archive/search.
- *
- * @package WordPress
- * @subpackage Twenty_Fourteen
- * @since Twenty Fourteen 1.0
- */
-?>
-
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 	<?php twentyfourteen_post_thumbnail(); ?>
 
@@ -32,8 +20,15 @@
 		<?php
 			$today = new DateTime();
 			$date = new DateTime(get_field('date'));
+
+			$venue = get_field('venue');
+			if (is_array($venue)) {
+				$venue = array_pop($venue);
+			}
 		 ?>
-			 <li><a href="<?php the_permalink(); ?>"><?php echo $date->format(get_option('date_format')); ?></li>
+			 <li>
+			 	<?php echo $date->format(get_option('date_format')); ?> at <?php echo get_the_title($venue); ?>
+			 </li>
 		</div><!-- .entry-meta -->
 	</header><!-- .entry-header -->
 
