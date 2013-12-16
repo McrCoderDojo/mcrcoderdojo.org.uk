@@ -134,7 +134,8 @@ function mcd_next_event($opts) {
             array(
                 'key' => 'date',
                 'value' => date('Y-m-d'),
-                'compare' => '>='
+                'compare' => '>=',
+                'type' => 'date',
             ),
         ),
         'order' => 'asc',
