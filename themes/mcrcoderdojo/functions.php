@@ -161,7 +161,7 @@ function twentyfourteen_has_featured_posts() {
  */
 function twentyfourteen_widgets_init() {
 	require get_template_directory() . '/inc/widgets.php';
-	register_widget( 'Twenty_Fourteen_Ephemera_Widget' );
+	register_widget('MCD_Social_Icons_Widget');
 
 	register_sidebar( array(
 		'name'          => __( 'Primary Sidebar', 'twentyfourteen' ),

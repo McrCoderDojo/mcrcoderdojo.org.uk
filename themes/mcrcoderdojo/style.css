@@ -4200,3 +4200,7 @@ a.post-thumbnail:hover {
 .user-bio.endcol {
 	clear:both;
 }
+
+.widget_mcd_social_icons_widget a img {
+	margin: 10px 3px;
+}

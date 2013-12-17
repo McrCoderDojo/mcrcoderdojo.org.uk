@@ -1,250 +1,124 @@
 <?php
-/**
- * Custom Widget for displaying specific post formats
- *
- * Displays posts from Aside, Quote, Video, Audio, Image, Gallery, and Link formats.
- *
- * @link http://codex.wordpress.org/Widgets_API#Developing_Widgets
- *
- * @package WordPress
- * @subpackage Twenty_Fourteen
- * @since Twenty Fourteen 1.0
- */
 
-class Twenty_Fourteen_Ephemera_Widget extends WP_Widget {
+class MCD_Social_Icons_Widget extends WP_Widget {
 
-	/**
-	 * The supported post formats.
-	 *
-	 * @access private
-	 * @since Twenty Fourteen 1.0
-	 *
-	 * @var array
-	 */
-	private $formats = array( 'aside', 'image', 'video', 'audio', 'quote', 'link', 'gallery' );
+    public function __construct() {
+        parent::__construct(
+            'mcd_social_icons_widget', // Base ID
+            'MCD Social Icons Widget', // Name
+            array('description' => 'Adds social icons to a sidebar')
+        );
+    }
 
-	/**
-	 * Pluralized post format strings.
-	 *
-	 * @access private
-	 * @since Twenty Fourteen 1.0
-	 *
-	 * @var array
-	 */
-	private $format_strings;
+    public function widget($args, $instance) {
+        $title = $instance['title'];
+        $twitter = $instance['twitter'];
+        $gplus = $instance['gplus'];
+        $facebook = $instance['facebook'];
+        $youtube = $instance['youtube'];
+        $flickr = $instance['flickr'];
+        $github = $instance['github'];
+        $gittip = $instance['gittip'];
 
-	/**
-	 * Constructor.
-	 *
-	 * @since Twenty Fourteen 1.0
-	 *
-	 * @return Twenty_Fourteen_Ephemera_Widget
-	 */
-	public function __construct() {
-		parent::__construct( 'widget_twentyfourteen_ephemera', __( 'Twenty Fourteen Ephemera', 'twentyfourteen' ), array(
-			'classname'   => 'widget_twentyfourteen_ephemera',
-			'description' => __( 'Use this widget to list your recent Aside, Quote, Video, Audio, Image, Gallery, and Link posts', 'twentyfourteen' ),
-		) );
+        echo $args['before_widget'];
+        if (!empty($title)) {
+            echo $args['before_title'] . $title . $args['after_title'];
+        }
 
-		/*
-		 * @todo http://core.trac.wordpress.org/ticket/23257: Add plural versions of Post Format strings
-		 */
-		$this->format_strings = array(
-			'aside'   => __( 'Asides',    'twentyfourteen' ),
-			'image'   => __( 'Images',    'twentyfourteen' ),
-			'video'   => __( 'Videos',    'twentyfourteen' ),
-			'audio'   => __( 'Audio',     'twentyfourteen' ),
-			'quote'   => __( 'Quotes',    'twentyfourteen' ),
-			'link'    => __( 'Links',     'twentyfourteen' ),
-			'gallery' => __( 'Galleries', 'twentyfourteen' ),
-		);
-	}
+        if (!empty($twitter)): ?>
+            <a href="<?php echo $twitter; ?>" target="_blank"><img src="<?php bloginfo('template_directory'); ?>/images/twitter-32x32.png" width="32" height="32" /></a>
+        <?php endif;
+        if (!empty($gplus)): ?>
+        <a href="<?php echo $gplus; ?>" target="_blank"><img src="<?php bloginfo('template_directory'); ?>/images/google-plus-32x32.png" width="32" height="32" /></a>
+        <?php endif;
+        if (!empty($facebook)): ?>
+        <a href="<?php echo $facebook; ?>" target="_blank"><img src="<?php bloginfo('template_directory'); ?>/images/facebook-32x32.png" width="32" height="32" /></a>
+        <?php endif;
+        if (!empty($youtube)): ?>
+        <a href="<?php echo $youtube; ?>" target="_blank"><img src="<?php bloginfo('template_directory'); ?>/images/youtube-32x32.png" width="32" height="32" /></a>
+        <?php endif;
+        if (!empty($flickr)): ?>
+        <a href="<?php echo $flickr; ?>" target="_blank"><img src="<?php bloginfo('template_directory'); ?>/images/flickr-32x32.png" width="32" height="32" /></a>
+        <?php endif;
+        if (!empty($github)): ?>
+        <a href="<?php echo $github; ?>" target="_blank"><img src="<?php bloginfo('template_directory'); ?>/images/github-32x32.png" width="32" height="32" /></a>
+        <?php endif;
+        if (!empty($gittip)): ?>
+        <a href="<?php echo $gittip; ?>" target="_blank"><img src="<?php bloginfo('template_directory'); ?>/images/gittip-32x32.png" width="32" height="32" /></a>
+        <?php endif;
 
-	/**
-	 * Output the HTML for this widget.
-	 *
-	 * @access public
-	 * @since Twenty Fourteen 1.0
-	 *
-	 * @param array $args     An array of standard parameters for widgets in this theme.
-	 * @param array $instance An array of settings for this widget instance.
-	 * @return void Echoes its output.
-	 */
-	public function widget( $args, $instance ) {
-		$format = $instance['format'];
-		$number = empty( $instance['number'] ) ? 2 : absint( $instance['number'] );
-		$title  = apply_filters( 'widget_title', empty( $instance['title'] ) ? $this->format_strings[ $format ] : $instance['title'], $instance, $this->id_base );
+        echo $args['after_widget'];
+    }
 
-		$ephemera = new WP_Query( array(
-			'order'          => 'DESC',
-			'posts_per_page' => $number,
-			'no_found_rows'  => true,
-			'post_status'    => 'publish',
-			'post__not_in'   => get_option( 'sticky_posts' ),
-			'tax_query'      => array(
-				array(
-					'taxonomy' => 'post_format',
-					'terms'    => array( "post-format-$format" ),
-					'field'    => 'slug',
-					'operator' => 'IN',
-				),
-			),
-		) );
+    public function form($instance) {
+        $title = $instance['title'];
+        $twitter = $instance['twitter'];
+        $gplus = $instance['gplus'];
+        $facebook = $instance['facebook'];
+        $youtube = $instance['youtube'];
+        $flickr = $instance['flickr'];
+        $github = $instance['github'];
+        $gittip = $instance['gittip'];
 
-		if ( $ephemera->have_posts() ) :
-			$tmp_content_width = $GLOBALS['content_width'];
-			$GLOBALS['content_width'] = 306;
+        ?>
+        <p>
+        <label for="<?php echo $this->get_field_id('title'); ?>">Title:</label>
+        <input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo esc_attr($title); ?>" />
+        </p>
 
-			echo $args['before_widget'];
-			?>
-			<h1 class="widget-title <?php echo esc_attr( $format ); ?>">
-				<a class="entry-format" href="<?php echo esc_url( get_post_format_link( $format ) ); ?>"><?php echo $title; ?></a>
-			</h1>
-			<ol>
+        <p>
+        <label for="<?php echo $this->get_field_id('twitter'); ?>">Twitter:</label>
+        <input class="widefat" id="<?php echo $this->get_field_id('twitter'); ?>" name="<?php echo $this->get_field_name('twitter'); ?>" type="text" value="<?php echo esc_attr($twitter); ?>" />
+        </p>
 
-				<?php while ( $ephemera->have_posts() ) : $ephemera->the_post(); ?>
-				<li>
-				<article <?php post_class(); ?>>
-					<div class="entry-content">
-						<?php
-							if ( has_post_format( 'gallery' ) ) :
+        <p>
+        <label for="<?php echo $this->get_field_id('gplus'); ?>">Google+:</label>
+        <input class="widefat" id="<?php echo $this->get_field_id('gplus'); ?>" name="<?php echo $this->get_field_name('gplus'); ?>" type="text" value="<?php echo esc_attr($gplus); ?>" />
+        </p>
 
-								if ( post_password_required() ) :
-									the_content( __( 'Continue reading <span class="meta-nav">&rarr;</span>', 'twentyfourteen' ) );
-								else :
-									$images = array();
+        <p>
+        <label for="<?php echo $this->get_field_id('facebook'); ?>">Facebook:</label>
+        <input class="widefat" id="<?php echo $this->get_field_id('facebook'); ?>" name="<?php echo $this->get_field_name('facebook'); ?>" type="text" value="<?php echo esc_attr($facebook); ?>" />
+        </p>
 
-									$galleries = get_post_galleries( get_the_ID(), false );
-									if ( isset( $galleries[0]['ids'] ) )
-										$images = explode( ',', $galleries[0]['ids'] );
+        <p>
+        <label for="<?php echo $this->get_field_id('youtube'); ?>">YouTube:</label>
+        <input class="widefat" id="<?php echo $this->get_field_id('youtube'); ?>" name="<?php echo $this->get_field_name('youtube'); ?>" type="text" value="<?php echo esc_attr($youtube); ?>" />
+        </p>
 
-									if ( ! $images ) :
-										$images = get_posts( array(
-											'fields'         => 'ids',
-											'numberposts'    => -1,
-											'order'          => 'ASC',
-											'orderby'        => 'menu_order',
-											'post_mime_type' => 'image',
-											'post_parent'    => get_the_ID(),
-											'post_type'      => 'attachment',
-										) );
-									endif;
+        <p>
+        <label for="<?php echo $this->get_field_id('flickr'); ?>">Flickr:</label>
+        <input class="widefat" id="<?php echo $this->get_field_id('flickr'); ?>" name="<?php echo $this->get_field_name('flickr'); ?>" type="text" value="<?php echo esc_attr($flickr); ?>" />
+        </p>
 
-									$total_images = count( $images );
+        <p>
+        <label for="<?php echo $this->get_field_id('github'); ?>">GitHub:</label>
+        <input class="widefat" id="<?php echo $this->get_field_id('github'); ?>" name="<?php echo $this->get_field_name('github'); ?>" type="text" value="<?php echo esc_attr($github); ?>" />
+        </p>
 
-									if ( has_post_thumbnail() ) :
-										$post_thumbnail = get_the_post_thumbnail();
-									elseif ( $total_images > 0 ) :
-										$image          = array_shift( $images );
-										$post_thumbnail = wp_get_attachment_image( $image, 'post-thumbnail' );
-									endif;
+        <p>
+        <label for="<?php echo $this->get_field_id('gittip'); ?>">Gittip:</label>
+        <input class="widefat" id="<?php echo $this->get_field_id('gittip'); ?>" name="<?php echo $this->get_field_name('gittip'); ?>" type="text" value="<?php echo esc_attr($gittip); ?>" />
+        </p>
 
-									if ( ! empty ( $post_thumbnail ) ) :
-						?>
-						<a href="<?php the_permalink(); ?>"><?php echo $post_thumbnail; ?></a>
-						<?php endif; ?>
-						<p class="wp-caption-text">
-							<?php
-								printf( _n( 'This gallery contains <a href="%1$s" rel="bookmark">%2$s photo</a>.', 'This gallery contains <a href="%1$s" rel="bookmark">%2$s photos</a>.', $total_images, 'twentyfourteen' ),
-									esc_url( get_permalink() ),
-									number_format_i18n( $total_images )
-								);
-							?>
-						</p>
-						<?php
-								endif;
+        <?php
+    }
 
-							else :
-								the_content( __( 'Continue reading <span class="meta-nav">&rarr;</span>', 'twentyfourteen' ) );
-							endif;
-						?>
-					</div><!-- .entry-content -->
+    public function update($new_instance, $old_instance) {
+        $instance = array();
+        $instance['title'] = !empty($new_instance['title']) ? strip_tags($new_instance['title']) : '';
+        $instance['twitter'] = !empty($new_instance['twitter']) ? strip_tags($new_instance['twitter']) : '';
+        $instance['gplus'] = !empty($new_instance['gplus']) ? strip_tags($new_instance['gplus']) : '';
+        $instance['facebook'] = !empty($new_instance['facebook']) ? strip_tags($new_instance['facebook']) : '';
+        $instance['youtube'] = !empty($new_instance['youtube']) ? strip_tags($new_instance['youtube']) : '';
+        $instance['flickr'] = !empty($new_instance['flickr']) ? strip_tags($new_instance['flickr']) : '';
+        $instance['github'] = !empty($new_instance['github']) ? strip_tags($new_instance['github']) : '';
+        $instance['gittip'] = !empty($new_instance['gittip']) ? strip_tags($new_instance['gittip']) : '';
 
-					<header class="entry-header">
-						<div class="entry-meta">
-							<?php
-								if ( ! has_post_format( 'link' ) ) :
-									the_title( '<h1 class="entry-title"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h1>' );
-								endif;
-
-								printf( '<span class="entry-date"><a href="%1$s" rel="bookmark"><time class="entry-date" datetime="%2$s">%3$s</time></a></span> <span class="byline"><span class="author vcard"><a class="url fn n" href="%4$s" rel="author">%5$s</a></span></span>',
-									esc_url( get_permalink() ),
-									esc_attr( get_the_date( 'c' ) ),
-									esc_html( get_the_date() ),
-									esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ),
-									get_the_author()
-								);
-
-								if ( ! post_password_required() && ( comments_open() || get_comments_number() ) ) :
-							?>
-							<span class="comments-link"><?php comments_popup_link( __( 'Leave a comment', 'twentyfourteen' ), __( '1 Comment', 'twentyfourteen' ), __( '% Comments', 'twentyfourteen' ) ); ?></span>
-							<?php endif; ?>
-						</div><!-- .entry-meta -->
-					</header><!-- .entry-header -->
-				</article><!-- #post-## -->
-				</li>
-				<?php endwhile; ?>
-
-			</ol>
-			<a class="post-format-archive-link" href="<?php echo esc_url( get_post_format_link( $format ) ); ?>"><?php printf( __( 'More %s <span class="meta-nav">&rarr;</span>', 'twentyfourteen' ), $this->format_strings[ $format ] ); ?></a>
-			<?php
-
-			echo $args['after_widget'];
-
-			// Reset the post globals as this query will have stomped on it.
-			wp_reset_postdata();
-
-			$GLOBALS['content_width'] = $tmp_content_width;
-
-		endif; // End check for ephemeral posts.
-	}
-
-	/**
-	 * Deal with the settings when they are saved by the admin.
-	 *
-	 * Here is where any validation should happen.
-	 *
-	 * @since Twenty Fourteen 1.0
-	 *
-	 * @param array $new_instance New widget instance.
-	 * @param array $instance     Original widget instance.
-	 * @return array Updated widget instance.
-	 */
-	function update( $new_instance, $instance ) {
-		$instance['title']  = strip_tags( $new_instance['title'] );
-		$instance['number'] = empty( $new_instance['number'] ) ? 2 : absint( $new_instance['number'] );
-		if ( in_array( $new_instance['format'], $this->formats ) ) {
-			$instance['format'] = $new_instance['format'];
-		}
-
-		return $instance;
-	}
-
-	/**
-	 * Display the form for this widget on the Widgets page of the Admin area.
-	 *
-	 * @since Twenty Fourteen 1.0
-	 *
-	 * @param array $instance
-	 * @return void
-	 */
-	function form( $instance ) {
-		$title  = empty( $instance['title'] ) ? '' : esc_attr( $instance['title'] );
-		$number = empty( $instance['number'] ) ? 2 : absint( $instance['number'] );
-		$format = isset( $instance['format'] ) && in_array( $instance['format'], $this->formats ) ? $instance['format'] : 'aside';
-		?>
-			<p><label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php _e( 'Title:', 'twentyfourteen' ); ?></label>
-			<input id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>" class="widefat" name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>"></p>
-
-			<p><label for="<?php echo esc_attr( $this->get_field_id( 'number' ) ); ?>"><?php _e( 'Number of posts to show:', 'twentyfourteen' ); ?></label>
-			<input id="<?php echo esc_attr( $this->get_field_id( 'number' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'number' ) ); ?>" type="text" value="<?php echo esc_attr( $number ); ?>" size="3"></p>
-
-			<p><label for="<?php echo esc_attr( $this->get_field_id( 'format' ) ); ?>"><?php _e( 'Post format to show:', 'twentyfourteen' ); ?></label>
-			<select id="<?php echo esc_attr( $this->get_field_id( 'format' ) ); ?>" class="widefat" name="<?php echo esc_attr( $this->get_field_name( 'format' ) ); ?>">
-				<?php foreach ( $this->formats as $slug ) : ?>
-				<option value="<?php echo esc_attr( $slug ); ?>"<?php selected( $format, $slug ); ?>><?php echo get_post_format_string( $slug ); ?></option>
-				<?php endforeach; ?>
-			</select>
-		<?php
-	}
+        return $instance;
+    }
 }
+function register_mcd_social_icons_widget() {
+    register_widget('MCD_Social_Icons_Widget');
+}
+add_action('widgets_init', 'register_mcd_social_icons_widget');
