@@ -99,7 +99,8 @@ function mcd_user_bio($opts) {
         $html .= "<div class='user-bio {$endcol}'><h3>{$name}</h3>";
 
         if ($photo) {
-            // $html .= "<img src='' style='width:140px;height:180px;border:1px solid black;' />";
+            $thumbnail = $photo['sizes']['thumbnail'];
+            $html .= "<img src='{$thumbnail}' />";
         }
 
         $html .= "{$bio}";
