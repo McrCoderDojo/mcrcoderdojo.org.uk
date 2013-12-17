@@ -10,4 +10,4 @@ Please file both issues and feature requests as issues on GitHub - even if you i
 
 ## Commits
 
-If you would like to work on this, or have a fix or feature, please file an issue first, then wait for a response from me (Ben), and if you do any work on it please fork the repo and commit to it - then file a PR against this one (even if you have push rights to this one) and I'll review before merging in.
+If you would like to work on this, or have a fix or feature, please file an issue first, then wait for a response from me (Ben), and if you do any work on it please fork the repo and commit to it - then file a PR against this one (even if you have push rights) and I'll review before merging in.
