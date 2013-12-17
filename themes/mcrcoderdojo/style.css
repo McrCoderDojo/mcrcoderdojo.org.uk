@@ -4197,8 +4197,14 @@ a.post-thumbnail:hover {
 	margin: 20px 0;
 }
 
+@media screen and (max-width: 780px) {
+	.user-bio {
+		width: 98%;
+	}
+}
+
 .user-bio.endcol {
-	clear:both;
+	clear: both;
 }
 
 .widget_mcd_social_icons_widget a img {
