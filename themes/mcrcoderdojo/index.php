@@ -5,16 +5,16 @@
 		<div id="content" class="site-content" role="main">
 
 		<?php
-			if (have_posts()):
-				while (have_posts()):
+			if (have_posts()) {
+				while (have_posts()) {
 					the_post();
 					get_template_part('content', 'post');
-				endwhile;
+				}
 				twentyfourteen_paging_nav();
-			else:
+			}
+			else {
 				get_template_part('content', 'none');
-
-			endif;
+			}
 		?>
 
 		</div><!-- #content -->
