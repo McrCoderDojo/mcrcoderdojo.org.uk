@@ -74,6 +74,13 @@ function create_venues_post_type() {
 }
 add_action('init', 'create_venues_post_type');
 
+// Filters
+
+function mcd_excerpt($more) {
+    return "... <a href='" . get_permalink() . "'>Continue reading</a>";
+}
+add_filter('excerpt_more', 'mcd_excerpt');
+
 // Shortcodes
 
 // Shortcode [userbio]

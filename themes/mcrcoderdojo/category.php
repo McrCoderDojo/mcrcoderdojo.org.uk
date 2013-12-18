@@ -13,7 +13,7 @@
 
 					while (have_posts()):
 						the_post();
-						get_template_part('content', 'post');
+						get_template_part('content', 'excerpt');
 					endwhile;
 
 					twentyfourteen_paging_nav();
