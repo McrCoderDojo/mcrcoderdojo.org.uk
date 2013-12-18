@@ -1038,15 +1038,10 @@ span + .edit-link:before,
  */
 
 .post-thumbnail {
-	background: #b2b2b2 url(images/pattern-light.svg) repeat fixed;
 	display: block;
 	position: relative;
 	width: 100%;
 	z-index: 0;
-}
-
-a.post-thumbnail:hover {
-	background-color: #999;
 }
 
 .full-width .post-thumbnail img {
@@ -2718,10 +2713,6 @@ a.post-thumbnail:hover {
  */
 
 .featured-content {
-	background: #000 url(images/pattern-dark.svg) repeat fixed;
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing:    border-box;
-	box-sizing:         border-box;
 	position: relative;
 	width: 100%;
 }
