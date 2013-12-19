@@ -1,74 +1,77 @@
 <?php
-/**
- * The template for displaying Author archive pages
- *
- * @link http://codex.wordpress.org/Template_Hierarchy
- *
- * @package WordPress
- * @subpackage Twenty_Fourteen
- * @since Twenty Fourteen 1.0
- */
+    get_header();
+    $author = get_queried_object();
+    $id = $author->ID;
 
-get_header(); ?>
+    $args = array(
+        'category_name' => 'blog',
+        'author' => $id,
+    );
 
-	<section id="primary" class="content-area">
-		<div id="content" class="site-content" role="main">
+    $author_posts = new WP_Query($args);
+?>
 
-			<?php if ( have_posts() ) : ?>
+<section id="primary" class="content-area">
+    <div id="content" class="site-content" role="main">
 
-			<header class="archive-header">
-				<h1 class="archive-title">
-					<?php
-						/*
-						 * Queue the first post, that way we know what author
-						 * we're dealing with (if that is the case).
-						 *
-						 * We reset this later so we can run the loop properly
-						 * with a call to rewind_posts().
-						 */
-						the_post();
+        <header class="archive-header">
+            <h1><?php the_author($id); ?></h1>
+            <?php
+                $user = get_userdata($id);
+                $name = "{$user->first_name} {$user->last_name}";
+                $fname = $user->first_name;
+                $photo = get_field('photo', "user_{$id}");
+                $web = $user->user_url;
+                $twitter = get_field('twitter', "user_{$id}");
+                $gplus = get_field('google_plus', "user_{$id}");
+            ?>
 
-						printf( __( 'All posts by %s', 'twentyfourteen' ), get_the_author() );
-					?>
-				</h1>
-				<?php if ( get_the_author_meta( 'description' ) ) : ?>
-				<div class="author-description"><?php the_author_meta( 'description' ); ?></div>
-				<?php endif; ?>
-			</header><!-- .archive-header -->
+            <div class="author-photo">
 
-			<?php
-					/*
-					 * Since we called the_post() above, we need to rewind
-					 * the loop back to the beginning that way we can run
-					 * the loop properly, in full.
-					 */
-					rewind_posts();
+            <?php
+                if ($photo) {
+                    $thumbnail = $photo['sizes']['thumbnail'];
+                    echo "<img src='{$thumbnail}' /><br />";
+                }
 
-					// Start the Loop.
-					while ( have_posts() ) : the_post();
+                if ($web) {
+                    echo "<a href='{$web}' class='web' target='_blank'>" . get_domain_from_url($web) . "</a><br />";
+                }
 
-						/*
-						 * Include the post format-specific template for the content. If you want to
-						 * use this in a child theme, then include a file called called content-___.php
-						 * (where ___ is the post format) and that will be used instead.
-						 */
-						get_template_part( 'content', get_post_format() );
+                if ($twitter) {
+                    echo "<a href='http://twitter.com/{$twitter}' class='twitter' target='_blank'>@{$twitter}</a><br />";
+                }
 
-					endwhile;
-					// Previous/next page navigation.
-					twentyfourteen_paging_nav();
+                if ($gplus) {
+                    $gplus_text = $gplus[0] == '+' ? "{$gplus}" : $name;
+                    echo "<a href='http://plus.google.com/{$gplus}' class='gplus' target='_blank'>{$gplus_text}</a>";
+                }
+            ?>
 
-				else :
-					// If no content, include the "No posts found" template.
-					get_template_part( 'content', 'none' );
+            </div>
 
-				endif;
-			?>
+            <div class="author-bio">
+                <?php the_field('bio', "user_{$id}"); ?>
+            </div>
+        </header><!-- .archive-header -->
+        <div class="entry-content full">
 
-		</div><!-- #content -->
-	</section><!-- #primary -->
+            <?php rewind_posts();
+
+            if ($author_posts->have_posts()): ?>
+
+                <h2><?php echo $fname; ?>'s Blog Posts</h2>
+                <?php while ($author_posts->have_posts()):
+                    $author_posts->the_post();
+                    get_template_part('grid', 'item');
+                endwhile;
+            endif; ?>
+        </div>
+
+    </div><!-- #content -->
+</section><!-- #primary -->
 
 <?php
-get_sidebar( 'content' );
+get_sidebar('content');
 get_sidebar();
 get_footer();

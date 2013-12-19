@@ -4231,3 +4231,13 @@ span + .edit-link:before,
 .widget_mcd_social_icons_widget a img {
 	margin: 10px 3px;
 }
+
+.author-photo {
+	width: 40%;
+	float: left;
+}
+
+.author-bio {
+	width: 60%;
+	float: left;
+}
