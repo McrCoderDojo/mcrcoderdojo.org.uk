@@ -135,44 +135,6 @@ function mcd_user_bio($opts) {
 }
 add_shortcode('userbio', 'mcd_user_bio');
 
-// Shortcode [nextevent]
-function mcd_next_event($opts) {
-    $args = array(
-        'post_type' => 'event',
-        'meta_query' => array(
-            array(
-                'key' => 'date',
-                'value' => date('Y-m-d'),
-                'compare' => '>=',
-                'type' => 'date',
-            ),
-        ),
-        'order' => 'asc',
-        'posts_per_page' => 1,
-    );
-
-    $next_event = new WP_Query($args);
-
-    if ($next_event->have_posts()) {
-        $next_event->the_post();
-        $date = new DateTime(get_field('date'));
-        $date_text = $date->format(get_option('date_format'));
-        $event_link = get_permalink();
-
-        $venue = get_field('venue');
-        if (is_array($venue)) {
-            $venue = array_pop($venue);
-        }
-        $venue = get_the_title($venue);
-
-        return "The next CoderDojo will be on <a href='{$event_link}'>{$date_text}</a> at {$venue}";
-    }
-    else {
-        return "Details of the next event will be posted shortly";
-    }
-}
-add_shortcode('nextevent', 'mcd_next_event');
-
 // Useful Functions
 
 function get_domain_from_url($url) {
