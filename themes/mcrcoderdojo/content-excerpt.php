@@ -1,12 +1,15 @@
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
     <header class="entry-header">
-        <?php if (in_array('category', get_object_taxonomies(get_post_type())) && twentyfourteen_categorized_blog()): ?>
         <div class="entry-meta">
-            <span class="cat-links"><?php echo get_the_category_list(_x(', ', 'Used between list items, there is a space after the comma.', 'twentyfourteen')); ?></span>
+            <?php $categories = get_the_category(); ?>
+            <span class="cat-links">
+            <?php foreach ($categories as $category): ?>
+                <a href="/<?php echo $category->slug; ?>/"><?php echo $category->name; ?></a>
+            <?php endforeach; ?>
+            </span>
         </div>
-        <?php
-            endif;
 
+        <?php
             if (is_single()) {
                 the_title('<h1 class="entry-title">', '</h1>');
             }
