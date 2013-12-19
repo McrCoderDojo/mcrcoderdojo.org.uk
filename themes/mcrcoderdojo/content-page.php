@@ -24,7 +24,8 @@
 	</div><!-- .entry-summary -->
 	<?php else: ?>
 	<div class="entry-content <?php echo $pagename; ?>">
-		<?php the_content(); ?>
+		<?php wp_reset_query();
+		the_content(); ?>
 	</div><!-- .entry-content -->
 	<?php endif; ?>
 
