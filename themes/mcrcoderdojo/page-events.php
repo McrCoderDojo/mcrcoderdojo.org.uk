@@ -4,32 +4,32 @@ get_header();
 
 $upcoming_events_args = array(
     'post_type' => 'event',
-        'meta_query' => array(
-            array(
-                'key' => 'date',
-                'value' => date('Y-m-d'),
-                'compare' => '>=',
-                'type' => 'date',
-            ),
+    'meta_query' => array(
+        array(
+            'key' => 'date',
+            'value' => date('Y-m-d'),
+            'compare' => '>=',
+            'type' => 'date',
         ),
-        'order' => 'asc',
-        'posts_per_page' => 1000,
+    ),
+    'order' => 'asc',
+    'posts_per_page' => 1000,
 );
 
 $upcoming_events = new WP_Query($upcoming_events_args);
 
 $past_events_args = array(
     'post_type' => 'event',
-        'meta_query' => array(
-            array(
-                'key' => 'date',
-                'value' => date('Y-m-d'),
-                'compare' => '<',
-                'type' => 'date',
-            ),
+    'meta_query' => array(
+        array(
+            'key' => 'date',
+            'value' => date('Y-m-d'),
+            'compare' => '<',
+            'type' => 'date',
         ),
-        'order' => 'desc',
-        'posts_per_page' => 1000,
+    ),
+    'order' => 'desc',
+    'posts_per_page' => 1000,
 );
 
 $past_events = new WP_Query($past_events_args);
