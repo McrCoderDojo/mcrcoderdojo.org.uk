@@ -90,12 +90,12 @@ function mcd_user_bio($opts) {
     $html = '';
 
     foreach (split(',', $usernames) as $i => $username) {
+        $username = trim($username);
         $user = get_user_by('slug', $username);
         $name = "{$user->first_name} {$user->last_name}";
         $fname = $user->first_name;
         $id = $user->id;
         $bio = get_field('bio', "user_{$id}");
-        $expertise = get_field('expertise', "user_{$id}");
         $photo = get_field('photo', "user_{$id}");
         $user = get_userdata($id);
         $web = $user->user_url;
@@ -103,18 +103,15 @@ function mcd_user_bio($opts) {
         $gplus = get_field('google_plus', "user_{$id}");
         $endcol = $i % 4 == 0 ? 'endcol' : '';
 
-        $html .= "<div class='user-bio {$endcol}'><h3>{$name}</h3>";
+        $html .= "<div class='user-bio {$endcol}'>";
+        $html .= "<h3><a href='/author/{$username}/'>{$name}</a></h3>";
 
         if ($photo) {
             $thumbnail = $photo['sizes']['thumbnail'];
-            $html .= "<img src='{$thumbnail}' />";
+            $html .= "<a href='/author/{$username}/'><img src='{$thumbnail}' /></a>";
         }
 
         $html .= "{$bio}";
-
-        if ($expertise) {
-            $html .= "{$fname} runs sessions in {$expertise}<br />";
-        }
 
         if ($web) {
             $html .= "<a href='{$web}' class='web' target='_blank'>" . get_domain_from_url($web) . "</a><br />";
