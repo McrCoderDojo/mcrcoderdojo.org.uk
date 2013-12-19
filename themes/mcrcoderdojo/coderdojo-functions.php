@@ -135,6 +135,16 @@ function mcd_user_bio($opts) {
 }
 add_shortcode('userbio', 'mcd_user_bio');
 
+// MCD Specific functions
+
+function mcd_get_venue_from_array($venue) {
+    $venue = get_field('venue');
+    if (is_array($venue)) {
+        $venue = array_pop($venue);
+        return $venue;
+    }
+}
+
 // Useful Functions
 
 function get_domain_from_url($url) {

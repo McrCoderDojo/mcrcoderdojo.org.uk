@@ -13,10 +13,7 @@
             $today = new DateTime();
             $date = new DateTime(get_field('date'));
 
-            $venue = get_field('venue');
-            if (is_array($venue)) {
-                $venue = array_pop($venue);
-            }
+            $venue = mcd_get_venue_from_array(get_field('venue'));
          ?>
     </header><!-- .entry-header -->
 
