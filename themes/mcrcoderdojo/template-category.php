@@ -21,17 +21,10 @@ $posts = new WP_Query($args);
                 </header>
 
                 <div class="entry-content full">
-                    <?php while ($posts->have_posts()): $posts->the_post(); ?>
-                        <div class="grid-item">
-                            <?php if (has_post_thumbnail()): ?>
-                                <a href="<?php the_permalink(); ?>"><?php the_post_thumbnail('thumbnail'); ?></a>
-                            <?php else: ?>
-                                <a href="<?php the_permalink(); ?>"><img src="<?php bloginfo('template_directory'); ?>/images/coderdojo.png" width="150" height="150" /></a>
-                            <?php endif; ?>
-                            <h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
-                            <span class="date"><?php echo get_the_date(); ?></span>
-                        </div>
-                    <?php endwhile; ?>
+                    <?php while ($posts->have_posts()):
+                        $posts->the_post();
+                        get_template_part('grid', 'item');
+                    endwhile; ?>
                 </div>
             </article>
         </div><!-- #content -->

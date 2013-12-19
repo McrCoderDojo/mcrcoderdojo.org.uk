@@ -26,7 +26,7 @@ function create_events_post_type() {
         'show_ui'            => true,
         'show_in_menu'       => true,
         'query_var'          => true,
-        'rewrite'            => array('slug' => 'events'),
+        'rewrite'            => array('slug' => 'event'),
         'capability_type'    => 'post',
         'has_archive'        => true,
         'hierarchical'       => false,
