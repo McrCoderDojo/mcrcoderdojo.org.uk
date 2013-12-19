@@ -1744,6 +1744,7 @@ span + .edit-link:before,
 
 .full-width .hentry {
 	max-width: 100%;
+	margin-top: -72px;
 }
 
 
