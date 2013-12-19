@@ -4220,7 +4220,9 @@ span + .edit-link:before,
 	text-decoration: none;
 }
 
-.grid-item .date {
+.grid-item .date,
+.grid-item .venue,
+.grid-item .author {
 	color: #24890d;
 	text-transform: uppercase;
 	font-size: 12px;
