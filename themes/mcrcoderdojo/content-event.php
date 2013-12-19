@@ -2,13 +2,7 @@
     <?php twentyfourteen_post_thumbnail(); ?>
 
     <header class="entry-header">
-        <?php if (in_array('category', get_object_taxonomies(get_post_type())) && twentyfourteen_categorized_blog()): ?>
-        <div class="entry-meta">
-            <span class="cat-links"><?php echo get_the_category_list(_x(', ', 'Used between list items, there is a space after the comma.', 'twentyfourteen')); ?></span>
-        </div>
-        <?php
-            endif;
-
+    <?php
             if (is_single()) {
                 the_title('<h1 class="entry-title">', '</h1>');
             }
