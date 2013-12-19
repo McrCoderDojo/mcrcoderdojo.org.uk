@@ -48,10 +48,14 @@ $past_events = new WP_Query($past_events_args);
 
                 <div class="entry-content full">
                     <h2>Upcoming Events</h2>
-                    <?php while ($upcoming_events->have_posts()):
-                        $upcoming_events->the_post();
-                        get_template_part('grid', 'item');
-                    endwhile; ?>
+                    <?php if ($upcoming_events->have_posts()):
+                        while ($upcoming_events->have_posts()):
+                            $upcoming_events->the_post();
+                            get_template_part('grid', 'item');
+                        endwhile;
+                    else:
+                        echo "No upcoming events scheduled. Please check back soon.";
+                    endif; ?>
 
                     <h2>Past Events</h2>
                     <?php while ($past_events->have_posts()):
