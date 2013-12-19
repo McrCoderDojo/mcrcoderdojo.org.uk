@@ -20,6 +20,11 @@ $posts = new WP_Query($args);
                     <h1 class="entry-title"><?php the_title(); ?></h1>
                 </header>
 
+                <div class="entry-content <?php echo $pagename; ?>">
+                    <?php wp_reset_query();
+                        the_content(); ?>
+                </div>
+
                 <div class="entry-content full">
                     <?php while ($posts->have_posts()):
                         $posts->the_post();
