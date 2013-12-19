@@ -4175,16 +4175,15 @@ span + .edit-link:before,
 
 /* Custom styles */
 
-.entry-content.team {
+.entry-content.team, .entry-content.full {
 	margin: 0;
 	max-width: 100%;
 }
 
-.user-bio {
+.user-bio, .grid-item {
 	width: 23%;
 	padding: 0 1%;
 	float: left;
-	min-height: 300px;
 	margin: 20px 0;
 }
 
@@ -4196,6 +4195,34 @@ span + .edit-link:before,
 
 .user-bio.endcol {
 	clear: both;
+}
+
+.grid-item {
+	text-align: center;
+}
+
+.grid-item img {
+	border: 3px solid #24890d;
+}
+
+.grid-item img:hover {
+	opacity: 0.85;
+}
+
+.grid-item h2 {
+	margin: 10px 0 0;
+}
+
+.grid-item h2 a {
+	font-size: 16px;
+	text-transform: uppercase;
+	text-decoration: none;
+}
+
+.grid-item .date {
+	color: #24890d;
+	text-transform: uppercase;
+	font-size: 12px;
 }
 
 .widget_mcd_social_icons_widget a img {
