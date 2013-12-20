@@ -15,7 +15,6 @@
     <div id="content" class="site-content" role="main">
 
         <header class="archive-header">
-            <h1><?php the_author($id); ?></h1>
             <?php
                 $user = get_userdata($id);
                 $name = "{$user->first_name} {$user->last_name}";
@@ -25,6 +24,7 @@
                 $twitter = get_field('twitter', "user_{$id}");
                 $gplus = get_field('google_plus', "user_{$id}");
             ?>
+            <h1><?php echo $name; ?></h1>
 
             <div class="author-photo">
 
