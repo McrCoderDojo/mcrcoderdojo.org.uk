@@ -74,6 +74,9 @@ function create_venues_post_type() {
 }
 add_action('init', 'create_venues_post_type');
 
+// Image sizes
+add_image_size('email', 564, 564, false);
+
 // Filters
 
 function mcd_excerpt($more) {
@@ -143,9 +146,3 @@ function mcd_get_venue_from_array($venue) {
 }
 
 // Useful Functions
-
-function get_domain_from_url($url) {
-    $parsed_url = parse_url($url);
-    $domain = str_replace('www.', '', $parsed_url['host']);
-    return $domain;
-}
