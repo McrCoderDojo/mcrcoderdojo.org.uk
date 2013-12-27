@@ -3,7 +3,7 @@
 Plugin Name: Manchester CoderDojo Newsletter Generator
 Plugin URI: https://github.com/mcrcoderdojo/mcrcoderdojo.org.uk
 Description: Generate HTML from WordPress Post for a mailchimp newsletter
-Version: 1.0
+Version: 1.1
 Author: Ben Nuttall
 Author URI: http://bennuttall.com/
 */

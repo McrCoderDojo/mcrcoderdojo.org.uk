@@ -35,6 +35,16 @@ include 'email-template.php';
 </textarea/><br />
 </form>
 
-<form action="http://mailchimp.com/" target="_new">
-<input type="submit" value="Go to Mailchimp" />
+<form action="<?php bloginfo('url'); ?>/wp-admin/post.php" style="float:left;">
+    <input type="hidden" name="post" value="<?php the_ID(); ?>" />
+    <input type="hidden" name="action" value="edit" />
+    <input type="submit" value="Edit this Issue" />
+</form>
+
+<form action="<?php the_permalink(); ?>" target="_new" style="float:left;">
+    <input type="submit" value="View this Issue" />
+</form>
+
+<form action="http://mailchimp.com/" target="_new" style="float:left;">
+    <input type="submit" value="Go to Mailchimp" />
 </form>
