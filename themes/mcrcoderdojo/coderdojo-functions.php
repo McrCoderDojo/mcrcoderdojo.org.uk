@@ -74,9 +74,6 @@ function create_venues_post_type() {
 }
 add_action('init', 'create_venues_post_type');
 
-// Image sizes
-add_image_size('email', 564, 564, false);
-
 // Filters
 
 function mcd_excerpt($more) {
@@ -107,14 +104,14 @@ function mcd_user_bio($opts) {
         $endcol = $i % 4 == 0 ? 'endcol' : '';
 
         $html .= "<div class='user-bio {$endcol}'>";
-        $html .= "<h3><a href='/author/{$username}/'>{$name}</a></h3>";
+        $html .= '<h3><a href="/author/' . $username . '">' . $name . '</a></h3>';
 
         if ($photo) {
             $thumbnail = $photo['sizes']['thumbnail'];
-            $html .= "<a href='/author/{$username}/'><img src='{$thumbnail}' /></a>";
+            $html .= '<a href="/author/"' . $username . '/"><img src="' . $thumbnail . '" /></a>';
         }
 
-        $html .= "{$bio}";
+        $html .= $bio;
 
         if ($web) {
             $html .= "<a href='{$web}' class='web' target='_blank'>" . get_domain_from_url($web) . "</a><br />";
@@ -134,6 +131,48 @@ function mcd_user_bio($opts) {
     return $html;
 }
 add_shortcode('userbio', 'mcd_user_bio');
+
+function mcd_google_map($post_code) {
+    echo mcd_google_map_sc(array('postcode' => $post_code));
+}
+
+function mcd_google_map_sc($opts) {
+    $post_code = $opts['postcode'];
+    $post_code = urlencode($post_code);
+    $url = "http://maps.googleapis.com/maps/api/geocode/json?address={$post_code}&sensor=false";
+    $json = json_decode(file_get_contents($url));
+
+    $lat = $json->results[0]->geometry->location->lat;
+    $lng = $json->results[0]->geometry->location->lng;
+    $dir = get_bloginfo('template_directory');
+
+    $html = "<div id='map-canvas' style='width:100%;height:300px;'></div>
+
+        <script type='text/javascript' src='https://maps.googleapis.com/maps/api/js?key=AIzaSyAjHypiArLzJ3yOE4qdHZDleTlEm_bDnmE&sensor=false'></script>
+        <script type='text/javascript'>
+            function initialize() {
+                var lat = {$lat};
+                var lng = {$lng};
+                var position = new google.maps.LatLng(lat, lng);
+                var mapOptions = {
+                    center: position,
+                    zoom: 13
+                };
+                var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+
+                var image = '{$dir}/images/coderdojo-32x32.png';
+                var marker = new google.maps.Marker({
+                    position: position,
+                    map: map,
+                    icon: image
+                });
+            }
+            google.maps.event.addDomListener(window, 'load', initialize);
+        </script>";
+
+        return $html;
+    }
+    add_shortcode('googlemap', 'mcd_google_map_sc');
 
 // MCD Specific functions
 

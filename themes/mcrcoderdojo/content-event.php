@@ -35,47 +35,16 @@
 
                 <h2>Venue</h2>
                 <strong><?php echo get_the_title($venue); ?></strong><br />
-                <?php echo the_field('address', $venue); ?><br />
-                <?php echo the_field('post_code', $venue); ?>
+                <?php the_field('address', $venue); ?><br />
+                <?php the_field('post_code', $venue); ?>
 
                 <h3>Parking</h3>
-                <?php echo the_field('parking', $venue); ?>
+                <?php the_field('parking', $venue); ?>
 
-                <div id="map-canvas" style="width:100%;height:300px;"></div>
+                <h3>Map</h3>
+                <?php mcd_google_map(get_field('post_code', $venue));
 
-                <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAjHypiArLzJ3yOE4qdHZDleTlEm_bDnmE&sensor=false"></script>
-                <script type="text/javascript">
-                <?php
-
-                $post_code = urlencode(get_field('post_code', $venue));
-                $url = "http://maps.googleapis.com/maps/api/geocode/json?address={$post_code}&sensor=false";
-                $json = json_decode(file_get_contents($url));
-
-                $lat = $json->results[0]->geometry->location->lat;
-                $lng = $json->results[0]->geometry->location->lng;
-
-                ?>
-                    function initialize() {
-                        var lat = <?php echo $lat; ?>;
-                        var lng = <?php echo $lng; ?>;
-                        var position = new google.maps.LatLng(lat, lng);
-                        var mapOptions = {
-                            center: position,
-                            zoom: 13
-                        };
-                        var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
-
-                        var image = "<?php bloginfo('template_directory'); ?>/images/coderdojo-32x32.png";
-                        var marker = new google.maps.Marker({
-                            position: position,
-                            map: map,
-                            icon: image
-                        });
-                    }
-                    google.maps.event.addDomListener(window, 'load', initialize);
-                </script>
-
-        <?php else:
+            else:
                 the_field('after_event_content');
             endif;
 
