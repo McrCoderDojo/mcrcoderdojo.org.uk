@@ -10,7 +10,7 @@
                                 <tbody>
                                     <tr>
                                         <td class="mcnImageContent" valign="top" style="padding-right: 0px;padding-left: 0px;padding-top: 0;padding-bottom: 0;text-align: center;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
-                                            <img align="center" alt="" src="<?php bloginfo('template_directory'); ?>/images/mcrcoderdojo-newsletter-banner.png" width="564" height="180" style="max-width: 564px;max-height:180px;padding-bottom: 0;display: inline !important;vertical-align: bottom;border: 0;line-height: 100%;outline: none;text-decoration: none;" class="mcnImage">
+                                            <img align="center" alt="" src="<?php bloginfo('template_directory'); ?>/images/mcrcoderdojo-newsletter-banner.png" width="309" height="98" style="max-width: 309px;max-height:98px;padding-bottom: 0;display: inline !important;vertical-align: bottom;border: 0;line-height: 100%;outline: none;text-decoration: none;" class="mcnImage">
                                         </td>
                                     </tr>
                                 </tbody>
