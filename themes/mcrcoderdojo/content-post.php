@@ -13,7 +13,7 @@
 
         <?php if (is_single()):
             if (get_field('issue_number')): ?>
-                <h1 class="entry-title">Post #<?php the_field('issue_number') ?>: <?php the_title(); ?></h1>
+                <h1 class="entry-title">Issue #<?php the_field('issue_number'); ?>: <?php the_title(); ?></h1>
             <?php else: ?>
                 <h1 class="entry-title"><?php the_title(); ?></h1>
         <?php endif;
