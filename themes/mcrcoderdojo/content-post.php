@@ -49,6 +49,10 @@
                 </ul>
             <?php endif;
 
+            if (get_field('picture_description')) {
+                the_field('picture_description');
+            }
+
             wp_link_pages(array(
                 'before'      => '<div class="page-links"><span class="page-links-title">' . __('Pages:', 'twentyfourteen') . '</span>',
                 'after'       => '</div>',
