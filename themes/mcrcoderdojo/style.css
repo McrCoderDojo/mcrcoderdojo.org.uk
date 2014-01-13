@@ -1069,6 +1069,10 @@ span + .edit-link:before,
 	text-transform: uppercase;
 }
 
+.entry-title.no-featured-image {
+	margin: 36px 0 12px;
+}
+
 .entry-title a {
 	color: #2b2b2b;
 }

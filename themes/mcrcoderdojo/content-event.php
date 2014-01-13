@@ -1,27 +1,23 @@
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-    <?php twentyfourteen_post_thumbnail(); ?>
+    <?php
+        twentyfourteen_post_thumbnail();
+        $class_no_featured_image = has_post_thumbnail() ? '' : 'no-featured-image';
+    ?>
+
 
     <header class="entry-header">
-    <?php
-            if (is_single()) {
-                the_title('<h1 class="entry-title">', '</h1>');
-            }
-            else {
-                the_title('<h1 class="entry-title"><a href="' . esc_url(get_permalink()) . '" rel="bookmark">', '</a></h1>');
-            }
-
-            $today = new DateTime();
-            $date = new DateTime(get_field('date'));
-
-            $venue = mcd_get_venue_from_array(get_field('venue'));
-         ?>
+        <h1 class="entry-title <?php echo $class_no_featured_image; ?>"><?php the_title(); ?></h1>
     </header>
 
-    <?php if (is_search()): ?>
-    <div class="entry-summary">
-        <?php the_excerpt(); ?>
-    </div>
-    <?php else: ?>
+    <?php
+
+        $today = new DateTime();
+        $date = new DateTime(get_field('date'));
+
+        $venue = mcd_get_venue_from_array(get_field('venue'));
+
+    ?>
+
     <div class="entry-content">
         <div class="col">
             <h2>Date &amp; Time</h2>
@@ -74,7 +70,5 @@
             ));
         ?>
     </div>
-    <?php endif;
-
-    the_tags('<footer class="entry-meta"><span class="tag-links">', '', '</span></footer>'); ?>
+    <?php the_tags('<footer class="entry-meta"><span class="tag-links">', '', '</span></footer>'); ?>
 </article>
