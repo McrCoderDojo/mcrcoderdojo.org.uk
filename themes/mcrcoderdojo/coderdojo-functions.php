@@ -138,12 +138,6 @@ function mcd_google_map($post_code) {
 
 function mcd_google_map_sc($opts) {
     $post_code = $opts['postcode'];
-    $post_code = urlencode($post_code);
-    $url = "http://maps.googleapis.com/maps/api/geocode/json?address={$post_code}&sensor=false";
-    $json = json_decode(file_get_contents($url));
-
-    $lat = $json->results[0]->geometry->location->lat;
-    $lng = $json->results[0]->geometry->location->lng;
     $dir = get_bloginfo('template_directory');
 
     $html = "<div id='map-canvas' style='width:100%;height:300px;'></div>
@@ -151,20 +145,26 @@ function mcd_google_map_sc($opts) {
         <script type='text/javascript' src='https://maps.googleapis.com/maps/api/js?key=AIzaSyAjHypiArLzJ3yOE4qdHZDleTlEm_bDnmE&sensor=false'></script>
         <script type='text/javascript'>
             function initialize() {
-                var lat = {$lat};
-                var lng = {$lng};
-                var position = new google.maps.LatLng(lat, lng);
+                geocoder = new google.maps.Geocoder();
                 var mapOptions = {
-                    center: position,
                     zoom: 13
                 };
-                var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+                map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+                codeAddress();
+            }
 
-                var image = '{$dir}/images/coderdojo-32x32.png';
-                var marker = new google.maps.Marker({
-                    position: position,
-                    map: map,
-                    icon: image
+            function codeAddress() {
+                var address = '{$post_code}';
+                geocoder.geocode( { 'address': address}, function(results, status) {
+                    if (status == google.maps.GeocoderStatus.OK) {
+                        map.setCenter(results[0].geometry.location);
+                        var image = '{$dir}/images/coderdojo-32x32.png';
+                        var marker = new google.maps.Marker({
+                            position: results[0].geometry.location,
+                            map: map,
+                            icon: image
+                        });
+                    }
                 });
             }
             google.maps.event.addDomListener(window, 'load', initialize);

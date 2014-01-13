@@ -4241,3 +4241,12 @@ span + .edit-link:before,
 	width: 60%;
 	float: left;
 }
+
+.col {
+	width: 50%;
+	float: left;
+}
+
+#map-canvas img {
+	max-width: none;
+}
