@@ -74,6 +74,9 @@ function create_venues_post_type() {
 }
 add_action('init', 'create_venues_post_type');
 
+// Image sizes
+add_image_size('email', 564, 564, false);
+
 // Filters
 
 function mcd_excerpt($more) {
