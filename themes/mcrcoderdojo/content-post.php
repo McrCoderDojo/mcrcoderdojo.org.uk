@@ -49,9 +49,10 @@
                 </ul>
             <?php endif;
 
-            if (get_field('picture_description')) {
-                the_field('picture_description');
-            }
+            if (get_field('picture_description')): ?>
+                <h2>This week's featured image</h2>
+                <?php the_field('picture_description');
+            endif;
 
             wp_link_pages(array(
                 'before'      => '<div class="page-links"><span class="page-links-title">' . __('Pages:', 'twentyfourteen') . '</span>',
