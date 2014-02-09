@@ -32,7 +32,8 @@
             <?php the_field('post_code', $venue); ?>
         </div>
 
-        <?php if ($date > $today): ?>
+
+        <?php if ($date > $today || ($date->format('Y-m-d') == $today->format('Y-m-d') && $today->format('H') < 14)): ?>
 
                 <h2>Tickets</h2>
                 <?php
