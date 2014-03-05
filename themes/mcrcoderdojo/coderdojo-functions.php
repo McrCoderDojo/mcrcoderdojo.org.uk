@@ -107,11 +107,11 @@ function mcd_user_bio($opts) {
         $endcol = $i % 4 == 0 ? 'endcol' : '';
 
         $html .= "<div class='user-bio {$endcol}'>";
-        $html .= '<h3><a href="/author/' . $username . '">' . $name . '</a></h3>';
+        $html .= '<h3><a href="/author/' . $username . '/">' . $name . '</a></h3>';
 
         if ($photo) {
             $thumbnail = $photo['sizes']['thumbnail'];
-            $html .= '<a href="/author/"' . $username . '/"><img src="' . $thumbnail . '" /></a>';
+            $html .= '<a href="/author/' . $username . '/"><img src="' . $thumbnail . '" /></a>';
         }
 
         $html .= $bio;
