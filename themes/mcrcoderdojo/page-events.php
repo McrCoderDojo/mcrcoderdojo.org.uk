@@ -1,6 +1,7 @@
 <?php
 /* Template name: Category archive */
 get_header();
+the_post();
 
 $upcoming_events_args = array(
     'post_type' => 'event',
@@ -47,6 +48,7 @@ $past_events = new WP_Query($past_events_args);
                 </header>
 
                 <div class="entry-content full">
+                    <?php the_content(); ?>
                     <h2>Upcoming Events</h2>
                     <?php if ($upcoming_events->have_posts()):
                         while ($upcoming_events->have_posts()):
