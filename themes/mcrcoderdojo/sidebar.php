@@ -8,7 +8,7 @@
  */
 ?>
 <div id="secondary">
-	<a href="/"><img src="<?php bloginfo('template_url'); ?>/images/coderdojo.png" width="162" height="162" class="logo" /></a>
+	<a href="/"><img src="<?php bloginfo('template_url'); ?>/images/mcrcoderdojo.png" width="162" height="162" class="logo" /></a>
 	<?php
 		$description = get_bloginfo( 'description', 'display' );
 		if ( ! empty ( $description ) ) :
